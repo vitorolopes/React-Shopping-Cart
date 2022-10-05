@@ -3,7 +3,6 @@ import { Navbar, Container, FormControl, Nav, Dropdown, Badge } from 'react-boot
 import "../styles.css";
 import {FaShoppingCart} from 'react-icons/fa'
 
-
 const Header = () => {
   return (
     <Navbar bg='dark' variant="dark" style={{height: 80}} >
@@ -19,14 +18,14 @@ const Header = () => {
 
         <Nav>
 
-          <Dropdown alignRight>
+          <Dropdown align="end" >
               <Dropdown.Toggle variant="success">
                 <FaShoppingCart color="white" fontSize="25px"/>
                 <Badge>{10}</Badge>
               </Dropdown.Toggle>
           </Dropdown>
 
-          <Dropdown.Menu style={{}}>
+          <Dropdown.Menu style={{minWidth: 370}}>
              <span style={{padding: 10}}>Cart is Empty</span>
           </Dropdown.Menu>
 
