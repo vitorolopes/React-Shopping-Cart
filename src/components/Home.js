@@ -1,14 +1,21 @@
 import React from 'react';
 import { useCartContext } from '../context/CartContextProvider';
-
+import SingleProduct from './SingleProduct'
 
 const Home = () => {
 
-  const {dummyValue} = useCartContext()
-  console.log(dummyValue);
-
+  const {state:{products}} = useCartContext()
+  
   return (
-    <div>Home</div>
+    <div className='Home'>
+      <div className="productContainer">
+        {
+          products.map( prod => {
+            return <SingleProduct prod={prod} key={prod.id}/>
+          })
+        }
+      </div>
+    </div>
   )
 }
 

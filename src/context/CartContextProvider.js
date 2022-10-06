@@ -1,13 +1,12 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useReducer } from 'react';
 import { faker } from '@faker-js/faker';
+import cartReducer from './cartReducer'
 
 const CartContext = createContext()
 
 export const CartContextProvider = ( {children} ) => {
 
-  const dummyValue = "This is a dummy value"
-
-  const products = [...Array(20)].map(() => (
+  const products = [...Array(20)].map(() => (//creates an array of 20 undefined elements
     {
       id: faker.datatype.uuid(),
       name: faker.commerce.productName(),
@@ -22,13 +21,15 @@ export const CartContextProvider = ( {children} ) => {
   )) // creates 20 objects with keys equalt to id, name, price
    // etc and values given by faker API
 
-
-  console.log(products);
+  const [state, dispatch] = useReducer(cartReducer, {
+      products: products,
+      cart: []
+  })
 
   return(
     <CartContext.Provider
         value={{
-            dummyValue
+            state
         }}
     >
       { children }
