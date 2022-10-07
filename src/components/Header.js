@@ -1,12 +1,14 @@
 import React from 'react';
-import { Navbar, Container, FormControl, Nav, Dropdown, Badge } from 'react-bootstrap';
+import { Navbar, Container, FormControl, Nav, Dropdown, Badge, Button } from 'react-bootstrap';
 import "../styles.css";
 import {FaShoppingCart} from 'react-icons/fa';
+import {AiFillDelete} from 'react-icons/ai';
 import { useCartContext } from '../context/CartContextProvider';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
 
-  const {state:{cart}} = useCartContext()
+  const {state:{cart}, removeFromCart} = useCartContext()
 
   return (
     <Navbar bg='dark' variant="dark" style={{height: 80}} >
@@ -27,6 +29,47 @@ const Header = () => {
                 <FaShoppingCart color="white" fontSize="25px"/>
                 <Badge>{cart.length}</Badge>
               </Dropdown.Toggle>
+
+              <Dropdown.Menu style={{ minWidth: 370}}>
+                {
+                  cart.length > 0
+                  ?
+                    ( <>
+                        {cart.map(prod => (
+                          <span className='cartitem' key={prod.id}>
+
+                            <img
+                              src={prod.image}
+                              className="cartItemImg"
+                              alt={prod.name}
+                            />
+                            <div className="cartItemDetail">
+                                <span>{prod.name}</span>
+                                <span>€ {prod.price.split(".")[0]}</span>
+                            </div>
+                            <AiFillDelete
+                                style={{cursor: "pointer", fontSize: "20px"}}
+                                onClick={()=>removeFromCart(prod.id)}
+                              />
+                            
+                          </span>
+                        ))}
+                    </> )
+                 
+                  :
+                    (<span style={{padding: 10}}>Cart is Empty!</span>)
+                }
+
+                <Link to="/cart">
+                  <Button style={{width: "95%", margin: "0 10px"}}>
+                      Go to Cart
+                  </Button>
+                </Link>
+
+              </Dropdown.Menu>
+
+     
+
           </Dropdown>
 
           <Dropdown.Menu style={{minWidth: 370}}>

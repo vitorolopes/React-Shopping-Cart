@@ -29,6 +29,7 @@ export const CartContextProvider = ( {children} ) => {
   const addToCart = (prod) => {
     dispatch({type:"ADD_TO_CART", payload: prod})
   }
+  
   const removeFromCart = (id) => {
     dispatch({type:"REMOVE_FROM_CART", payload: id})
   }
