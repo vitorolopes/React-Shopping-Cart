@@ -1,9 +1,13 @@
 import React from 'react';
 import { Navbar, Container, FormControl, Nav, Dropdown, Badge } from 'react-bootstrap';
 import "../styles.css";
-import {FaShoppingCart} from 'react-icons/fa'
+import {FaShoppingCart} from 'react-icons/fa';
+import { useCartContext } from '../context/CartContextProvider';
 
 const Header = () => {
+
+  const {state:{cart}} = useCartContext()
+
   return (
     <Navbar bg='dark' variant="dark" style={{height: 80}} >
       <Container>
@@ -21,7 +25,7 @@ const Header = () => {
           <Dropdown align="end" >
               <Dropdown.Toggle variant="success">
                 <FaShoppingCart color="white" fontSize="25px"/>
-                <Badge>{10}</Badge>
+                <Badge>{cart.length}</Badge>
               </Dropdown.Toggle>
           </Dropdown>
 

@@ -2,8 +2,12 @@ import React from 'react';
 import '../styles.css';
 import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
+import { useCartContext } from '../context/CartContextProvider';
+
 
 const SingleProduct = ({prod}) => {
+
+  const {state:{cart}, addToCart, removeFromCart} = useCartContext()
 
   return (
     <div className='products'>
@@ -26,15 +30,22 @@ const SingleProduct = ({prod}) => {
             <Rating rating={prod.ratings}/>
           </Card.Subtitle>
 
-          <Button variant='danger'>
-            Remove from Cart
-          </Button>
-          
-          <Button
-            disabled={prod.inStock === 0}
-          >
-            {prod.inStock === 0 ? "Out of Stock" : "Add to Cart"}
-          </Button>
+          {
+            cart.some(item => item.id === prod.id)
+            ?
+              ( <Button variant='danger'
+                  onClick={ () => removeFromCart(prod.id)}
+                >
+                  Remove from Cart
+               </Button>)
+            :
+              ( <Button
+                  disabled={prod.inStock === 0}
+                  onClick={ () => addToCart(prod)}
+                >
+                  {prod.inStock === 0 ? "Out of Stock" : "Add to Cart"}
+                </Button>)
+          }
 
         </Card.Body>
 
