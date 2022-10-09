@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Rating from './Rating';
+import { useShopContext } from '../context/ShopContextProvider';
 
 const Filters = () => {
 
-  const [rate, setRate] = useState(3)
+  // const [rate, setRate] = useState(3)
 
+  const {filterState:{byStock, byFastDelivery, byRating}, filterByRating} = useShopContext()
+  
   return (
     <div className='filters'>
       <span className="title">Filter Products</span>
@@ -53,9 +56,9 @@ const Filters = () => {
         <span>
           <label style={{ paddingRight: 10 }}>Rating: </label>
           <Rating
-              rating={rate} 
+              rating={byRating} 
               style={{ cursor: "pointer" }}
-              onClick={(i)=> setRate(i+1)}
+              onClick={(i)=> filterByRating(i+1)}
           />
         </span>
 

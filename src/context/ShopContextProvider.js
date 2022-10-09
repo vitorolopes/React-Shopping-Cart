@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { faker } from '@faker-js/faker';
-import cartReducer from './cartReducer'
+import {cartReducer} from './reducers'
+import {filterReducer} from './reducers'
 
-const CartContext = createContext()
+const ShopContext = createContext()
 
-export const CartContextProvider = ( {children} ) => {
-
+export const ShopContextProvider = ( {children} ) => {
+//* CART
   const products = [...Array(20)].map(() => (//creates an array of 20 undefined elements
     {
       id: faker.datatype.uuid(),
@@ -21,37 +22,46 @@ export const CartContextProvider = ( {children} ) => {
   )) // creates 20 objects with keys equalt to id, name, price
    // etc and values given by faker API
 
-  const [state, dispatch] = useReducer(cartReducer, {
+  const [cartState, cartDispatch] = useReducer(cartReducer, {
       products: products,
       cart: []
   })
 
   const addToCart = (prod) => {
-    dispatch({type:"ADD_TO_CART", payload: prod})
+    cartDispatch({type:"ADD_TO_CART", payload: prod})
   }
   
   const removeFromCart = (id) => {
-    dispatch({type:"REMOVE_FROM_CART", payload: id})
+    cartDispatch({type:"REMOVE_FROM_CART", payload: id})
   }
 
   const changeCartQuantity = (id, newQuantity) => {
     console.log(id, newQuantity)
-    dispatch({type:"CHANGE_CART_QUANTITY", payload: {id, qty: newQuantity}})
+    cartDispatch({type:"CHANGE_CART_QUANTITY", payload: {id, qty: newQuantity}})
+  }
+//* FILTERS
+  const filterInitialState = {byStock: false, byFastDelivery:0, byRating: 0}
+  const [filterState, filterDispatch] = useReducer(filterReducer, filterInitialState)
+
+  const filterByRating = (ratingFilter) => {
+     
   }
 
   return(
-    <CartContext.Provider
+    <ShopContext.Provider
         value={{
-            state,
+            cartState,
             addToCart,
             removeFromCart,
-            changeCartQuantity
+            changeCartQuantity,
+            filterState,
+            filterByRating
         }}
     >
       { children }
-    </CartContext.Provider>
+    </ShopContext.Provider>
   )
 
 }
 
-export const useCartContext = () => useContext(CartContext)
+export const useShopContext = () => useContext(ShopContext)

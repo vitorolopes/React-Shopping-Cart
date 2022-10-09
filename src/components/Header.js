@@ -3,12 +3,12 @@ import { Navbar, Container, FormControl, Nav, Dropdown, Badge, Button } from 're
 import "../styles.css";
 import {FaShoppingCart} from 'react-icons/fa';
 import {AiFillDelete} from 'react-icons/ai';
-import { useCartContext } from '../context/CartContextProvider';
+import { useShopContext } from '../context/ShopContextProvider';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
 
-  const {state:{cart}, removeFromCart} = useCartContext()
+  const {cartState:{cart}, removeFromCart} = useShopContext()
 
   return (
     <Navbar bg='dark' variant="dark" style={{height: 80}} >

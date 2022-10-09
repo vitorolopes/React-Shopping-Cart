@@ -2,12 +2,12 @@ import React from 'react';
 import '../styles.css';
 import { Card, Button } from 'react-bootstrap';
 import Rating from './Rating';
-import { useCartContext } from '../context/CartContextProvider';
+import { useShopContext } from '../context/ShopContextProvider';
 
 
 const SingleProduct = ({prod}) => {
 
-  const {state:{cart}, addToCart, removeFromCart} = useCartContext()
+  const {cartState:{cart}, addToCart, removeFromCart} = useShopContext()
 
   return (
     <div className='products'>

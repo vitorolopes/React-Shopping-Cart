@@ -1,11 +1,11 @@
 import React from 'react';
-import { useCartContext } from '../context/CartContextProvider';
+import { useShopContext } from '../context/ShopContextProvider';
 import Filters from './Filters';
 import SingleProduct from './SingleProduct'
 
 const Home = () => {
 
-  const {state:{products}} = useCartContext()
+  const {cartState:{products}} = useShopContext()
   
   return (
     <div className='home'>

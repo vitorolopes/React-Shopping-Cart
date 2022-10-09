@@ -1,4 +1,4 @@
-const cartReducer = (prevState, action) => { 
+export const cartReducer = (prevState, action) => { 
   switch(action.type){
     case "ADD_TO_CART":{
       const newState = {
@@ -25,10 +25,16 @@ const cartReducer = (prevState, action) => {
       }
       return newState
   
-
     default:
       return prevState
   }
  }
 
- export default cartReducer
+export const filterReducer = (prevState, action) => {
+  switch(action.type){
+            
+
+    default:
+      return prevState
+  }
+}

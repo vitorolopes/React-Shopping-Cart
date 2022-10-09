@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import { ListGroup, Row, Col, Image, Form, Button } from 'react-bootstrap';
 import { AiFillDelete } from 'react-icons/ai';
-import { useCartContext } from '../context/CartContextProvider';
+import { useShopContext } from '../context/ShopContextProvider';
 import Rating from './Rating';
 
 
 const Cart = () => {
 
-  const {state:{cart}, removeFromCart, changeCartQuantity} = useCartContext()
+  const {cartState:{cart}, removeFromCart, changeCartQuantity} = useShopContext()
 
    //* Setting Local State 
   const [total, setTotal] = useState()
