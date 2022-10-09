@@ -15,6 +15,17 @@ const cartReducer = (prevState, action) => {
       }
       return newState
     }
+
+    case "CHANGE_CART_QUANTITY": 
+      const newState = {
+        ...prevState,
+        cart: prevState.cart.filter(item=>
+          item.id === action.payload.id ? (item.qty = action.payload.qty) : (item.qty)
+        )
+      }
+      return newState
+  
+
     default:
       return prevState
   }
