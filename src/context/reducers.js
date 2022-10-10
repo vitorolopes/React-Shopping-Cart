@@ -75,6 +75,13 @@ export const filterReducer = (prevState, action) => {
       return newState
     }
 
+    case "FILTER_BY_SEARCH": {
+      const newState = {
+        ...prevState,
+        searchQuery: action.payload
+      }
+      return newState
+    }
 
     default:
       return prevState

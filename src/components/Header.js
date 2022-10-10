@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
 
-  const {cartState:{cart}, removeFromCart} = useShopContext()
+  const {cartState:{cart}, removeFromCart, filterBySearch} = useShopContext()
 
   return (
     <Navbar bg='dark' variant="dark" style={{height: 80}} >
@@ -19,7 +19,9 @@ const Header = () => {
         </Navbar.Brand>
 
         <Navbar.Text className='search'>
-          <FormControl style={{width: 500}} placeholder="Search..." className='m-auto'/>
+          <FormControl style={{width: 500}} placeholder="Search..." className='m-auto'
+                       onChange={ e => filterBySearch(e.target.value) }
+          />
         </Navbar.Text>
 
         <Nav>
