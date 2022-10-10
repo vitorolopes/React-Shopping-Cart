@@ -40,12 +40,33 @@ export const ShopContextProvider = ( {children} ) => {
     cartDispatch({type:"CHANGE_CART_QUANTITY", payload: {id, qty: newQuantity}})
   }
 //* FILTERS
-  const filterInitialState = {byStock: false, byFastDelivery:0, byRating: 0}
+  const filterInitialState = {byStock: false, byFastDelivery: false, byRating: 0}
   const [filterState, filterDispatch] = useReducer(filterReducer, filterInitialState)
 
   const filterByRating = (ratingFilter) => {
-     
+     filterDispatch({type: "FILTER_BY_RATING", payload: ratingFilter})
   }
+
+  const sortByPriceIn = (ascORdesc) => { 
+      filterDispatch(
+        {
+          type: "SORT_BY_PRICE",
+          payload: ascORdesc
+        }
+      )
+  }
+
+  const filterByStock = () => { 
+    filterDispatch({type: "FILTER_BY_STOCK"})
+  }
+
+  const filterByFastDelivery = () => { 
+    filterDispatch({type: "FILTER_BY_FAST_DELIVERY"})
+  }
+
+  const clearFilters = () => { 
+    filterDispatch({type: "CLEAR_FILTERS"})
+   }
 
   return(
     <ShopContext.Provider
@@ -55,7 +76,11 @@ export const ShopContextProvider = ( {children} ) => {
             removeFromCart,
             changeCartQuantity,
             filterState,
-            filterByRating
+            filterByRating,
+            sortByPriceIn,
+            filterByStock,
+            filterByFastDelivery,
+            clearFilters
         }}
     >
       { children }

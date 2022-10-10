@@ -7,7 +7,10 @@ const Filters = () => {
 
   // const [rate, setRate] = useState(3)
 
-  const {filterState:{byStock, byFastDelivery, byRating}, filterByRating} = useShopContext()
+  const {filterState:{sortIn, byStock, byFastDelivery, byRating},
+         sortByPriceIn, filterByStock, filterByFastDelivery, 
+         filterByRating, clearFilters} 
+         = useShopContext()
   
   return (
     <div className='filters'>
@@ -20,6 +23,8 @@ const Filters = () => {
             name="group1"
             type="radio"
             id={`inline-1`}
+            onChange={()=>sortByPriceIn( "ascending")}
+            checked={sortIn === "ascending" ? true : false}
         />
       </span>
 
@@ -30,6 +35,8 @@ const Filters = () => {
             name="group1"
             type="radio"
             id={`inline-2`}
+            onChange={()=>sortByPriceIn("descending")}
+            checked={sortIn === "descending" ? true : false}
         />
       </span>
 
@@ -40,6 +47,8 @@ const Filters = () => {
             name="group1"
             type="checkbox"
             id={`inline-3`}
+            onChange={filterByStock}
+            checked={byStock}
         />
       </span>
 
@@ -50,6 +59,8 @@ const Filters = () => {
             name="group1"
             type="checkbox"
             id={`inline-4`}
+            onChange={filterByFastDelivery}
+            checked={byFastDelivery}
         />
         </span>
 
@@ -64,6 +75,7 @@ const Filters = () => {
 
         <Button
             variant="light" 
+            onClick={clearFilters}
         >
           Clear Filters
         </Button>
