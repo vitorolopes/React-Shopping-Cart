@@ -15,7 +15,7 @@ const Header = () => {
       <Container>
 
         <Navbar.Brand>
-          <a href="/">Shopping Cart</a>
+          <Link to="/">Shopping Cart</Link>
         </Navbar.Brand>
 
         <Navbar.Text className='search'>
